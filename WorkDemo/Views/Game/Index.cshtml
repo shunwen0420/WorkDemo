@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WorkDemo.Models.GameViewModel>
+
+@{
+    ViewData["Title"] = "遊戲清單";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">新增</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GameName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(@item.GameName, "Edit", new { id = item.GameID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <img src="@item.Image" href="@item.GameName" />
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.GameID" class="btn btn-danger">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
